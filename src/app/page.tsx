@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
+import axios from 'axios'
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation'
@@ -82,6 +83,17 @@ export default function Home() {
 
   function onClick(adjustment: number) {
     setUserObj({...userObj, amount : (Math.max(100, Math.min(1000, userObj.amount + adjustment))) })
+  }
+  
+  const handleSubmit = async () =>{
+    try {
+      console.log(userObj);
+      const response = await axios.post("/api/users/challenge", userObj)
+      console.log(response.data)
+    } catch (error : any) {
+      console.log("error occured on submit" + error.message)
+    }
+
   }
 
   return (
@@ -257,7 +269,7 @@ export default function Home() {
                   </div>
                 </div>
                 <DrawerFooter>
-                  <Button onClick={()=>(console.log(userObj))}>Submit</Button>
+                  <Button onClick={handleSubmit}>Submit</Button>
                   <DrawerClose asChild>
                     <Button variant="outline">Cancel</Button>
                   </DrawerClose>

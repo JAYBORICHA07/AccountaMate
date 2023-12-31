@@ -2,19 +2,33 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    email: {
+    userName: {
         type: String,
         require: [true, "Provide email"],
-        unique: true,
     },
-    password: {
+    userEmail: {
         type: String,
-        require: [true, "Provide Password"],
-        unique: true,
+        require: [true, "Provide email"],
+    },
+    friendName: {
+        type: String,
+        require: [true, "Provide email"],
+    },
+    friendEmail: {
+        type: String,
+        require: [true, "Provide email"],
+    },
+    amount: {
+        type: Number,
+        require: [true, "Provide email"],
     },
     goals : {
         type : [String],
-    }
+    },
+    date: {
+        type: String,
+        require: [true, "Provide email"],
+    },
 });
 
 

@@ -1,4 +1,3 @@
-"user server"
 import mongoose from "mongoose";
 
 export async function Connect(){
