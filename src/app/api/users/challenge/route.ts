@@ -10,9 +10,11 @@ export async function POST(request : NextRequest){
         const reqBody = await request.json();
         console.log(reqBody);
 
+
         const {userName, userEmail, friendsEmail,friendsName,amount,goal,date} = reqBody;
 
-        const newUser = new User({
+        console.log("hi")
+        const addedUser = new User({
             userName, 
             userEmail,
             friendsEmail,
@@ -21,13 +23,13 @@ export async function POST(request : NextRequest){
             goal,
             date
         })
-        console.log(newUser);
+        console.log(addedUser);
 
-        const savedUser = newUser.save();
+        const savedUser = addedUser.save();
         console.log(savedUser);
 
         return NextResponse.json({
-            data : savedUser,
+            // data : savedUser,
             sucess : true,
             msg : 'Challenge created successfully'
         })

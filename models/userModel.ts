@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
         require: [true, "Provide email"],
     },
     goals : {
-        type : [String],
+        type : String,
     },
     date: {
         type: String,
@@ -32,7 +32,6 @@ const userSchema = new mongoose.Schema({
 });
 
 
-
-const User = mongoose.models.Users || mongoose.model("Users", userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;
