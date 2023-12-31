@@ -25,6 +25,7 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
+import { userObj } from '../../types/userType';
 const data = [
   {
     Amount: 400,
@@ -69,11 +70,18 @@ const data = [
 
 export default function Home() {
   const router = useRouter();
-  const [date, setDate] = useState<Date>()
-  const [amount, setAmount] = useState(100)
+  const [userObj, setUserObj] = useState<userObj>({
+    userName : '',
+    userEmail : '',
+    friendsEmail : '',
+    friendsName : '',
+    amount : 100,
+    goal :'',
+    date : new Date()
+  })
 
   function onClick(adjustment: number) {
-    setAmount(Math.max(100, Math.min(1000, amount + adjustment)))
+    setUserObj({...userObj, amount : (Math.max(100, Math.min(1000, userObj.amount + adjustment))) })
   }
 
   return (
@@ -153,7 +161,7 @@ export default function Home() {
         </div>
         <div className='flex flex-col md:flex-row max-w-4xl'>
           <div>
-            <Input placeholder='Eneter your Goal' className='w-80 p-8 m-3' />
+            <Input placeholder='Eneter your Goal' className='w-80 p-8 m-3' onChange={(e: any) => {setUserObj({...userObj, goal : e.target.value })}}/>
           </div>
           <div className='flex max-w-4xl'>
             <Popover>
@@ -162,18 +170,18 @@ export default function Home() {
                   variant={"outline"}
                   className={cn(
                     "w-80 p-8 m-3 justify-start text-left font-normal",
-                    !date && "text-muted-foreground"
+                    !userObj.date && "text-muted-foreground"
                   )}
                 >
                   <CalendarIcon className="mr-1 h-4 w-4" />
-                  {date ? format(date, "PPP") : <span>Achive Goal by/Practise Goal Everyday till</span>}
+                  {userObj.date ? format(userObj.date, "PPP") : <span>Achive Goal by/Practise Goal Everyday till</span>}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
                 <Calendar
                   mode="single"
-                  selected={date}
-                  onSelect={setDate}
+                  selected={userObj.date}
+                  onSelect={(newDate : any) =>{newDate > userObj.date ? setUserObj({...userObj, date : newDate}) : alert("Can not select Past Dates")}}
                   initialFocus
                 />
               </PopoverContent>
@@ -182,12 +190,12 @@ export default function Home() {
         </div>
         <div className='flex flex-col max-w-4xl justify-evenly'>
           <div className='flex flex-col md:flex-row justify-evenly p-1'>
-            <Input placeholder='Your Name' className='w-80 p-8 m-3' />
-            <Input placeholder='Your Email' className='w-80 p-8 m-3' />
+            <Input placeholder='Your Name' className='w-80 p-8 m-3' onChange={(e: any) => {setUserObj({...userObj, userName: e.target.value })}} />
+            <Input placeholder='Your Email' className='w-80 p-8 m-3' onChange={(e: any) => {setUserObj({...userObj, userEmail : e.target.value })}} />
           </div>
           <div className='flex flex-col md:flex-row justify-evenly p-1'>
-            <Input placeholder='Your friends name' className='w-80 p-8 m-3' />
-            <Input placeholder='Your friends email' className='w-80 p-8 m-3' />
+            <Input placeholder='Your friends name' className='w-80 p-8 m-3' onChange={(e: any) => {setUserObj({...userObj, friendsName : e.target.value })}}/>
+            <Input placeholder='Your friends email' className='w-80 p-8 m-3' onChange={(e: any) => {setUserObj({...userObj, friendsEmail : e.target.value })}}/>
           </div>
         </div>
         <div className='mb-8'>
@@ -198,8 +206,8 @@ export default function Home() {
             <DrawerContent>
               <div className="mx-auto w-full max-w-sm">
                 <DrawerHeader>
-                  <DrawerTitle>Move Goal</DrawerTitle>
-                  <DrawerDescription>Set your daily activity goal.</DrawerDescription>
+                  <DrawerTitle>Select Amount</DrawerTitle>
+                  <DrawerDescription>If you fail you will not get this amount back.</DrawerDescription>
                 </DrawerHeader>
                 <div className="p-4 pb-0">
                   <div className="flex items-center justify-center space-x-2">
@@ -208,14 +216,14 @@ export default function Home() {
                       size="icon"
                       className="h-8 w-8 shrink-0 rounded-full"
                       onClick={() => onClick(-10)}
-                      disabled={amount <= 200}
+                      disabled={userObj.amount <= 200}
                     >
                       <Minus className="h-4 w-4" />
                       <span className="sr-only">Decrease</span>
                     </Button>
                     <div className="flex-1 text-center">
                       <div className="text-7xl font-bold tracking-tighter">
-                        {amount}
+                        {userObj.amount}
                       </div>
                       <div className="text-[0.70rem] uppercase text-muted-foreground">
                         Rupees
@@ -226,7 +234,7 @@ export default function Home() {
                       size="icon"
                       className="h-8 w-8 shrink-0 rounded-full"
                       onClick={() => onClick(10)}
-                      disabled={amount >= 1000}
+                      disabled={userObj.amount >= 1000}
                     >
                       <Plus className="h-4 w-4" />
                       <span className="sr-only">Increase</span>
@@ -249,7 +257,7 @@ export default function Home() {
                   </div>
                 </div>
                 <DrawerFooter>
-                  <Button>Submit</Button>
+                  <Button onClick={()=>(console.log(userObj))}>Submit</Button>
                   <DrawerClose asChild>
                     <Button variant="outline">Cancel</Button>
                   </DrawerClose>
