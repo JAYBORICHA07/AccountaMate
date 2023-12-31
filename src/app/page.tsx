@@ -89,7 +89,7 @@ export default function Home() {
         </div>
       </section>
       <section id='activities' className='flex justify-center m-0'>
-        <div className='grid grid-cols-1 md:grid-cols-3 md:gap-1 grid-flow-row sgap-y-1'>
+        <div className='grid grid-cols-1 md:grid-cols-3 md:gap-1 grid-flow-row gap-y-1'>
           <figure className="max-w-sm flex justify-center items-center transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0 ">
             <img className="rounded-lg hover:opacity-80" src='/images/travelv2.jpeg' alt="image description" />
             <figcaption className="absolute px-4 text-4xl font-extrabold text-white">
