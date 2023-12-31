@@ -80,7 +80,7 @@ export default function Home() {
 
   return (
     <div className="h-screen w-full">
-      <section className='flex flex-col h-full w-full justify-center items-center p-4'>
+      <section className='flex flex-col h-full w-full justify-center items-center'>
         <div className='rounded-full bg-orange-300 w-fit p-1 m-2 px-5 mb-6'>
           <p className='font-bold'>Ultimate accountability platform</p>
         </div>
@@ -148,8 +148,8 @@ export default function Home() {
           </figure>
         </div>
       </section>
-      <section id='challenge_form' className='bg-orange-300 flex flex-col h-fit w-full justify-center items-center p-4 mt-20'>
-        <div className='max-w-4xl'>
+      <section id='challenge_form' className='bg-orange-300 flex flex-col h-fit w-full justify-center items-center mt-20'>
+        <div className='max-w-4xl mt-3'>
           <p className='text-6xl font-bold text-center'>Challenge Yourself</p>
           <p className='font-semibold w-full text-center my-5'>Ready to transform your goals into reality? Join the AccountaMate community today and experience the power of accountability. Set your goals, invite friends as supervisors, and embark on a journey of achievement. Become a part of the accountability revolution that is changing the way we approach our aspirations.</p>
         </div>
@@ -192,7 +192,7 @@ export default function Home() {
             <Input placeholder='Your friends email' className='w-80 p-8 m-3' />
           </div>
         </div>
-        <div>
+        <div className='mb-8'>
           <Drawer>
             <DrawerTrigger asChild>
               <Button variant="outline">Create Challenge</Button>
