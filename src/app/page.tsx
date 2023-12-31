@@ -82,7 +82,7 @@ export default function Home() {
         <div className='rounded-full bg-orange-300 p-1 px-5 mb-6'>
           <p className='font-bold'>Ultimate accountability platform</p>
         </div>
-        <p className='text-6xl font-bold max-w-5xl text-center mb-7'>AccountaMate Achieve Your Goals with Accountability</p>
+        <p className='text-4xl md:text-5xl font-bold max-w-5xl text-center mb-7'>AccountaMate Achieve Your Goals with Accountability</p>
         <p className='font-bold max-w-6xl mb-7 text-center'>Welcome to AccountaMate, the ultimate accountability platform that turns your goals into achievements! Discover how our unique system you reach your targets with the power of accountability can keep you on track and help</p>
         <div >
           <Button size={'lg'} onClick={() => (router.push('#challenge_form'))}>Set your first goal now</Button>
